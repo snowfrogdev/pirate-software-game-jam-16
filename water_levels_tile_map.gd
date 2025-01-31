@@ -46,6 +46,10 @@ func update_water_values():
 		var current_value = current[1]
 
 		for neighbor_pos in terrain_tile_map.get_surrounding_cells(current_pos):
+			# Skip if the neighbor_pos is not in the terrain_tile_map used cells
+			if not terrain_tile_map.get_used_cells().has(neighbor_pos):
+				continue
+			
 			var current_neighbor_value = water_values.get_or_add(neighbor_pos, 0)
 			var neighbor_value = current_value - 1
 			if neighbor_value > current_neighbor_value:
